@@ -1,0 +1,34 @@
+public class BPlusTreeDemo {
+
+    static class BPlusNode {
+        boolean isLeaf;
+        int[] keys;
+        BPlusNode[] children;
+        BPlusNode next;
+    }
+
+    static int rangeCount(BPlusNode root, int lo, int hi) {
+        BPlusNode leaf = root;
+
+        while (!leaf.isLeaf) {
+            leaf = leaf.children[0];
+        }
+
+        int count = 0;
+
+        while (leaf != null) {
+            for (int k : leaf.keys) {
+                if (k >= lo && k <= hi) {
+                    count++;
+                }
+            }
+            leaf = leaf.next;
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("B+ Tree Demo Running...");
+    }
+}
